@@ -17,20 +17,22 @@ async function getMovies(url) {
     const res = await fetch(url)
     const data = await res.json()
 
-   showMovies(data.results)
+    showMovies(data.results)
+
 }
+
 
 function showMovies(movies) {
     main.innerHTML = ''
 
     movies.forEach((movie) => {
-    const { title, poster_path, vote_average, overview } = movie
+        const { title, poster_path, vote_average, overview } = movie
 
-    const movieElement = document.createElement('div')
+        const movieElement = document.createElement('div')
 
-    movieElement.classList.add('movie')
+        movieElement.classList.add('movie')
 
-    movieElement.innerHTML = `
+        movieElement.innerHTML = `
     
             <img src="${IMG_PATH + poster_path}" alt="${title}">
             <div class="movie-info">
@@ -43,21 +45,20 @@ function showMovies(movies) {
             </div>
        
     `
-     
-    main.appendChild(movieElement)
+
+        main.appendChild(movieElement)
 
     });
 }
 
 function getClassByRate(vote) {
-    if(vote >= 8) {
+    if (vote >= 8) {
         return 'green'
-    } else if(vote >= 5) {
+    } else if (vote >= 5) {
         return 'orange'
     } else {
         return 'red'
     }
-
 }
 
 form.addEventListener('submit', (e) => {
@@ -65,7 +66,7 @@ form.addEventListener('submit', (e) => {
 
     const searchTerm = search.value
 
-    if(searchTerm && searchTerm !== '') {
+    if (searchTerm && searchTerm !== '') {
         getMovies(SEARCH_API + searchTerm)
 
         search.value = ''
